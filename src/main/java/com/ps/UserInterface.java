@@ -1,5 +1,6 @@
 package com.ps;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -12,37 +13,41 @@ public class UserInterface {
         scanner = new Scanner(System.in);
     }
 
-    public void displayHomeScreen(){
+    public void displayHomeScreen() {
+        boolean validInput = false;
 
-        try{
+        do {
+            System.out.println("Pick an option:");
+            System.out.println("1) New Order");
+            System.out.println("0) Exit Deli App");
 
-            do{
-
-                System.out.println("Pick an option");
-                System.out.println("1) New Order");
-                System.out.println("0) Exit Deli App");
-
+            try {
                 userHomeScreenChoice = scanner.nextInt();
                 scanner.nextLine();
 
-                if(userHomeScreenChoice == 1){
-                    displayOrderScreen();
+                if (userHomeScreenChoice == 1 || userHomeScreenChoice == 0) {
+                    validInput = true;
+                    switch (userHomeScreenChoice) {
+                        case 1:
+                            displayOrderScreen();
+                            break;
+                        case 0:
+                            System.out.println("Exiting Deli App :(");
+                            break;
+                    }
+                } else {
+                    System.out.println("Invalid option. Please select 1 or 0.");
                 }
-
-
-
-            } while(userHomeScreenChoice != 0);
-
-        } catch(Exception e){
-            System.out.println("Error");
-        }
-
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+            }
+        } while (!validInput);
     }
 
     public void displayOrderScreen(){
 
         try{
-
             do{
 
                 System.out.println("1) Add Sandwich");
@@ -59,6 +64,8 @@ public class UserInterface {
                         // Goal is to make an instance of THIS sandwich for THIS order for THIS product. Need to instantiate a new order.
                         Sandwich sandwich = createSandwich();
                         break;
+                    default:
+                        System.out.println("Invalid option");
                 }
 
 
@@ -75,12 +82,12 @@ public class UserInterface {
     private Sandwich createSandwich() {
 
         Sandwich sandwich = null;
-
         String breadType = null;
+        int size = 0;
 
         try {
 
-            do{
+            do {
 
                 System.out.println("Select your bread:");
                 System.out.println("1) White");
@@ -108,13 +115,16 @@ public class UserInterface {
                         System.out.println("Bread does not exist. Please try again");
                 }
 
-            } while(breadType == null);
+            } while (breadType == null);
+
+        } catch(Exception e){
+            System.out.println("Error for bread type");
+        }
 
             ///////////////////////////////////////////////
 
-            int size = 0;
-
-            do{
+        try {
+            do {
 
                 System.out.println("Select sandwich size:");
                 System.out.println("1) 4\"");
@@ -123,7 +133,6 @@ public class UserInterface {
 
                 int sizeChoice = scanner.nextInt();
                 scanner.nextLine();
-
 
                 switch (sizeChoice) {
                     case 1:
@@ -139,71 +148,74 @@ public class UserInterface {
                         System.out.println("Size does not exist. Please try again");
                 }
 
-            } while(size == 0);
-
-            //////////////////////////////////////////////////////////////////////////
+            } while (size == 0);
 
             sandwich = new Sandwich(size, breadType);
 
+        } catch(Exception e) {
+            System.out.println("Error for size");
+        }
+
+            //////////////////////////////////////////////////////////////////////////
+
             int meatChoice = 0;
             String meatType = null;
+            boolean extra = false;
 
-            do{
+            try {
 
-                System.out.println("Pick a meat:");
-                System.out.println("1) Steak");
-                System.out.println("2) Ham");
-                System.out.println("3) Salami");
-                System.out.println("4) Roast Beef");
-                System.out.println("5) Chicken");
-                System.out.println("6) Bacon");
+                do {
 
-                meatChoice = scanner.nextInt();
-                scanner.nextLine();
+                    System.out.println("Pick a meat:");
+                    System.out.println("1) Steak");
+                    System.out.println("2) Ham");
+                    System.out.println("3) Salami");
+                    System.out.println("4) Roast Beef");
+                    System.out.println("5) Chicken");
+                    System.out.println("6) Bacon");
 
-                switch (meatChoice) {
-                    case 1:
-                        meatType = "Steak";
-                        break;
-                    case 2:
-                        meatType = "Ham";
-                        break;
-                    case 3:
-                        meatType = "Salami";
-                        break;
-                    case 4:
-                        meatType = "Roast Beef";
-                        break;
-                    case 5:
-                        meatType = "Chicken";
-                        break;
-                    case 6:
-                        meatType = "Bacon";
-                        break;
-                    default:
-                        System.out.println("Invalid meat choice. Try again.");
+                    meatChoice = scanner.nextInt();
+                    scanner.nextLine();
 
-                }
+                    switch (meatChoice) {
+                        case 1:
+                            meatType = "Steak";
+                            break;
+                        case 2:
+                            meatType = "Ham";
+                            break;
+                        case 3:
+                            meatType = "Salami";
+                            break;
+                        case 4:
+                            meatType = "Roast Beef";
+                            break;
+                        case 5:
+                            meatType = "Chicken";
+                            break;
+                        case 6:
+                            meatType = "Bacon";
+                            break;
+                        default:
+                            System.out.println("Invalid meat choice. Try again.");
 
-                boolean extra = false;
+                    }
 
-                System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
-                int extraChoice = scanner.nextInt();
+                    //System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
+                    // int extraChoice = scanner.nextInt();
 
-                if (extraChoice == 1) {
-                    extra = true;
-                } else
-                    extra = false;
+                    // if (extraChoice == 1) {
+                    //     extra = true;
+                    //  } else
+                    //     extra = false;
 
-                sandwich.addMeat(meatType, extra);
+                } while (meatType == null);
+            } catch(Exception e) {
+                System.out.println("Error for meat type");}
 
-            } while(meatType == null);
-
+            //sandwich.addMeat(meatType, extra);
             System.out.println(sandwich);
 
-        } catch (Exception e) {
-            System.out.println("error");
-        }
 
         return sandwich;
     }
