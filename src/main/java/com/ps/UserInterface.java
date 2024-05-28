@@ -26,7 +26,7 @@ public class UserInterface {
                 scanner.nextLine();
 
                 if(userHomeScreenChoice == 1){
-                    //displayOrderScreen();
+                    displayOrderScreen();
                 }
 
 
@@ -57,6 +57,8 @@ public class UserInterface {
                 switch(userOrderScreenChoice){
                     case 1:
                         // Goal is to make an instance of THIS sandwich for THIS order for THIS product. Need to instantiate a new order.
+                        Sandwich sandwich = createSandwich();
+                        break;
                 }
 
 
@@ -70,5 +72,70 @@ public class UserInterface {
 
     }
 
+    private Sandwich createSandwich() {
 
+        Sandwich sandwich = null;
+        try {
+
+            System.out.println("Select your bread:");
+            System.out.println("1) White");
+            System.out.println("2) Wheat");
+            System.out.println("3) Rye");
+            System.out.println("4) Wrap");
+
+            int breadChoice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            String breadType = null;
+
+            switch (breadChoice) {
+                case 1:
+                    breadType = "White";
+                    break;
+                case 2:
+                    breadType = "Wheat";
+                    break;
+                case 3:
+                    breadType = "Rye";
+                    break;
+                case 4:
+                    breadType = "Wrap";
+                    break;
+            }
+
+            ///////////////////////////////////////////////
+
+            System.out.println("Select sandwich size:");
+            System.out.println("1) 4\"");
+            System.out.println("2) 8\"");
+            System.out.println("3) 12\"");
+
+            int sizeChoice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            int size = 0;
+
+            switch (sizeChoice) {
+                case 1:
+                    size = 4;
+                    break;
+                case 2:
+                    size = 8;
+                    break;
+                case 3:
+                    size = 12;
+                    break;
+            }
+
+            sandwich = new Sandwich(size, breadType);
+            System.out.println(sandwich);
+
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+
+        return sandwich;
+
+
+    }
 }
