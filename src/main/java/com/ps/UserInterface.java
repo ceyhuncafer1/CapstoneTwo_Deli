@@ -105,34 +105,44 @@ public class UserInterface {
                         breadType = "Wrap";
                         break;
                     default:
-                        System.out.println("Bread does not exist");
+                        System.out.println("Bread does not exist. Please try again");
                 }
 
             } while(breadType == null);
 
             ///////////////////////////////////////////////
 
-            System.out.println("Select sandwich size:");
-            System.out.println("1) 4\"");
-            System.out.println("2) 8\"");
-            System.out.println("3) 12\"");
-
-            int sizeChoice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
-
             int size = 0;
 
-            switch (sizeChoice) {
-                case 1:
-                    size = 4;
-                    break;
-                case 2:
-                    size = 8;
-                    break;
-                case 3:
-                    size = 12;
-                    break;
-            }
+            do{
+
+                System.out.println("Select sandwich size:");
+                System.out.println("1) 4\"");
+                System.out.println("2) 8\"");
+                System.out.println("3) 12\"");
+
+                int sizeChoice = scanner.nextInt();
+                scanner.nextLine();
+
+
+                switch (sizeChoice) {
+                    case 1:
+                        size = 4;
+                        break;
+                    case 2:
+                        size = 8;
+                        break;
+                    case 3:
+                        size = 12;
+                        break;
+                    default:
+                        System.out.println("Size does not exist. Please try again");
+                }
+
+                sandwich = new Sandwich(size, breadType);
+                System.out.println(sandwich);
+
+            } while(size == 0);
 
             sandwich = new Sandwich(size, breadType);
             System.out.println(sandwich);
