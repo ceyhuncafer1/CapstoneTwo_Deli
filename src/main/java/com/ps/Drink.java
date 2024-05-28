@@ -2,6 +2,13 @@ package com.ps;
 
 public class Drink extends Product{
 
+    private String size;
+    private String flavor;
+
+    public Drink(String size, String flavor) {
+        this.size = size;
+        this.flavor = flavor;
+    }
 
     @Override
     public double calcPrice() {
@@ -10,6 +17,9 @@ public class Drink extends Product{
 
     @Override
     public String toString() {
-        return "";
+        return "Drink{" +
+                "size='" + size + '\'' +
+                ", flavor='" + flavor + '\'' +
+                '}';
     }
 }
