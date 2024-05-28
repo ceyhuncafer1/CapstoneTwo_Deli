@@ -75,33 +75,40 @@ public class UserInterface {
     private Sandwich createSandwich() {
 
         Sandwich sandwich = null;
+
+        String breadType = null;
+
         try {
 
-            System.out.println("Select your bread:");
-            System.out.println("1) White");
-            System.out.println("2) Wheat");
-            System.out.println("3) Rye");
-            System.out.println("4) Wrap");
+            do{
 
-            int breadChoice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+                System.out.println("Select your bread:");
+                System.out.println("1) White");
+                System.out.println("2) Wheat");
+                System.out.println("3) Rye");
+                System.out.println("4) Wrap");
 
-            String breadType = null;
+                int breadChoice = scanner.nextInt();
+                scanner.nextLine(); // consume newline
 
-            switch (breadChoice) {
-                case 1:
-                    breadType = "White";
-                    break;
-                case 2:
-                    breadType = "Wheat";
-                    break;
-                case 3:
-                    breadType = "Rye";
-                    break;
-                case 4:
-                    breadType = "Wrap";
-                    break;
-            }
+                switch (breadChoice) {
+                    case 1:
+                        breadType = "White";
+                        break;
+                    case 2:
+                        breadType = "Wheat";
+                        break;
+                    case 3:
+                        breadType = "Rye";
+                        break;
+                    case 4:
+                        breadType = "Wrap";
+                        break;
+                    default:
+                        System.out.println("Bread does not exist");
+                }
+
+            } while(breadType == null);
 
             ///////////////////////////////////////////////
 
