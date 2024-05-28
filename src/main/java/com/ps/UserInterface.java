@@ -139,12 +139,66 @@ public class UserInterface {
                         System.out.println("Size does not exist. Please try again");
                 }
 
-                sandwich = new Sandwich(size, breadType);
-                System.out.println(sandwich);
-
             } while(size == 0);
 
+            //////////////////////////////////////////////////////////////////////////
+
             sandwich = new Sandwich(size, breadType);
+
+            int meatChoice = 0;
+            String meatType = null;
+
+            do{
+
+                System.out.println("Pick a meat:");
+                System.out.println("1) Steak");
+                System.out.println("2) Ham");
+                System.out.println("3) Salami");
+                System.out.println("4) Roast Beef");
+                System.out.println("5) Chicken");
+                System.out.println("6) Bacon");
+
+                meatChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (meatChoice) {
+                    case 1:
+                        meatType = "Steak";
+                        break;
+                    case 2:
+                        meatType = "Ham";
+                        break;
+                    case 3:
+                        meatType = "Salami";
+                        break;
+                    case 4:
+                        meatType = "Roast Beef";
+                        break;
+                    case 5:
+                        meatType = "Chicken";
+                        break;
+                    case 6:
+                        meatType = "Bacon";
+                        break;
+                    default:
+                        System.out.println("Invalid meat choice. Try again.");
+
+                }
+
+                boolean extra = false;
+
+                System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
+                int extraChoice = scanner.nextInt();
+
+                if (extraChoice == 1) {
+                    extra = true;
+                } else
+                    extra = false;
+
+                sandwich.addMeat(meatType, extra);
+
+            } while(meatType == null);
+
             System.out.println(sandwich);
 
         } catch (Exception e) {
@@ -152,7 +206,5 @@ public class UserInterface {
         }
 
         return sandwich;
-
-
     }
 }
