@@ -70,14 +70,17 @@ public class UserInterface {
                     case 1:
                         Sandwich sandwich = createSandwich();
                         currentOrder.addProduct(sandwich);
+                        printCurrentOrder();
                         break;
                     case 2:
                         Drink drink = createDrink();
                         currentOrder.addProduct(drink);
+                        printCurrentOrder();
                         break;
                     case 3:
                         Chip chip = createChip();
                         currentOrder.addProduct(chip);
+                        printCurrentOrder();
                         break;
                     case 4:
                         //checkout
@@ -493,7 +496,7 @@ public class UserInterface {
         sandwich.addSide(sideType);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        System.out.println(sandwich);
+        //System.out.println(sandwich);
         return sandwich;
     }
 
@@ -628,5 +631,16 @@ public class UserInterface {
         System.out.println(chip);
         return new Chip(chipType);
     }
+
+    private void printCurrentOrder() {
+        System.out.println("Current order:");
+        List<Product> products = currentOrder.getProducts();
+        for (int i = products.size() - 1; i >= 0; i--) {
+            System.out.println(products.get(i));
+        }
+    }
+
+
+
 
 }

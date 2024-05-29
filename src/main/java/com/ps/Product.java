@@ -1,5 +1,7 @@
 package com.ps;
 
+import java.util.List;
+
 public abstract class Product {
 
     protected double price;

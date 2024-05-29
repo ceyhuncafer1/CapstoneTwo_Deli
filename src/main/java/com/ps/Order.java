@@ -15,6 +15,10 @@ public class Order {
         products.add(product);
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
