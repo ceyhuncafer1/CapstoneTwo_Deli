@@ -670,6 +670,21 @@ public class UserInterface {
 
         printCurrentOrder();
 
+        System.out.println("1) Confirm Order");
+        System.out.println("2) Cancel - Delete Order");
+        int ans = scanner.nextInt();
+
+        if (ans == 1) {
+
+            FileManager receiptFileManager = new FileManager();
+            receiptFileManager.saveReceipt(currentOrder);
+            System.out.println("Order confirmed and receipt saved.");
+            currentOrder = new Order();
+
+        } else {
+            System.out.println("Order cancelled.");
+            currentOrder = new Order();
+        }
 
     }
 

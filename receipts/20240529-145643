@@ -1,0 +1,5 @@
+Transaction ID: mHMUHG2ZzlG
+Order details:
+Drink{size='Small', flavor='Coke', price=2.0} - Price: $2.0
+Chip{chipType='Lays BBQ', price=1.5} - Price: $1.5
+Total order cost: $3.5

@@ -21,8 +21,18 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "products=" + products +
-                '}';
+
+        String receiptOutput = "Order details:\n";
+        double totalCost = 0;
+
+        for (Product product : products) {
+            double productPrice = product.calcPrice();
+            receiptOutput += product + " - Price: $" + productPrice + "\n";
+            totalCost += productPrice;
+        }
+
+        receiptOutput += "Total order cost: $" + totalCost + "\n";
+        return receiptOutput;
+
     }
 }
