@@ -1,6 +1,8 @@
 package com.ps;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -32,51 +34,63 @@ public class UserInterface {
                             displayOrderScreen();
                             break;
                         case 0:
-                            System.out.println("Exiting Deli App :(");
+                            System.out.println("Quitting DELI-CIOUS Sandwiches!");
                             break;
                     }
                 } else {
-                    System.out.println("Invalid option. Please select 1 or 0.");
+                    System.out.println("Option does not exist. Please select 1 or 0.");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println("Make sure you choose a number.");
                 scanner.next();
             }
         } while (!validInput);
     }
 
-    public void displayOrderScreen(){
+    public void displayOrderScreen() {
 
-        try{
-            do{
+        List<Sandwich> sandwiches = new ArrayList<>();
+        boolean ordering = true;
 
-                System.out.println("1) Add Sandwich");
-                System.out.println("2) Add Drink");
-                System.out.println("3) Add Chips");
-                System.out.println("4) Checkout");
-                System.out.println("0) Cancel Order");
+        while (ordering) {
 
+            System.out.println("Order Screen");
+            System.out.println("1) Add Sandwich");
+            System.out.println("2) Add Drink");
+            System.out.println("3) Add Chips");
+            System.out.println("4) Checkout");
+            System.out.println("0) Cancel Order");
+
+            try {
                 userOrderScreenChoice = scanner.nextInt();
                 scanner.nextLine();
 
-                switch(userOrderScreenChoice){
+                switch (userOrderScreenChoice) {
                     case 1:
-                        // Goal is to make an instance of THIS sandwich for THIS order for THIS product. Need to instantiate a new order.
                         Sandwich sandwich = createSandwich();
+                        sandwiches.add(sandwich);
+                        break;
+                    case 2:
+                        //drinks
+                        break;
+                    case 3:
+                        //chips
+                        break;
+                    case 4:
+                        //checkout
+                        ordering = false;
+                        break;
+                    case 0:
+                        ordering = false;
                         break;
                     default:
-                        System.out.println("Invalid option");
+                        System.out.println("The number you chose is not on the screen.");
                 }
-
-
-
-            } while(userOrderScreenChoice != 0);
-
-
-        } catch(Exception e){
-            System.out.println("Error");
+            } catch (InputMismatchException e) {
+                System.out.println("You typed a data type other than an integer. Make sure you pick either 1, 2, 3, 4, or 0");
+                scanner.next();
+            }
         }
-
     }
 
     private Sandwich createSandwich() {
