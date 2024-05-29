@@ -422,6 +422,28 @@ public class UserInterface {
         } while(sauceType == null);
 
         sandwich.addSauce(sauceType);
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        boolean isToasted = false;
+
+        do{
+            System.out.println("Do you want your sandwich toasted? (1 = yes , 0 = no)");
+            try{
+                int extraChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                if(extraChoice == 1){
+                    isToasted = true;
+                }else
+                    isToasted = false;
+            } catch(InputMismatchException e){
+                System.out.println("Invalid type.");
+                scanner.next();
+            }
+
+        } while(!isToasted);
+
+        sandwich.setToasted(isToasted);
 
         System.out.println(sandwich);
         return sandwich;
