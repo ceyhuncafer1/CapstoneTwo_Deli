@@ -1,6 +1,5 @@
 package com.ps;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -512,8 +511,6 @@ public class UserInterface {
 
         sandwich.addSide(sideType);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //System.out.println(sandwich);
         return sandwich;
     }
 
@@ -648,20 +645,23 @@ public class UserInterface {
     }
 
     private void printCurrentOrder() {
-
         List<Product> products = currentOrder.getProducts();
-        System.out.println("Your Current order:");
+
+        System.out.println("\nYour Current Order:");
+        System.out.println("-------------------------------");
 
         double totalCost = 0;
 
         for (int i = products.size() - 1; i >= 0; i--) {
             Product product = products.get(i);
             double productPrice = product.calcPrice();
-            System.out.println(product);
+            System.out.printf("%-25s $%.2f%n", product, productPrice);
             totalCost += productPrice;
         }
 
-        System.out.println("Total: $" + totalCost);
+        System.out.println("-------------------------------");
+        System.out.printf("Total: $%.2f%n", totalCost);
+        System.out.println();
     }
 
     private void checkout(){
@@ -687,8 +687,4 @@ public class UserInterface {
         displayHomeScreen();
 
     }
-
-
-
-
 }

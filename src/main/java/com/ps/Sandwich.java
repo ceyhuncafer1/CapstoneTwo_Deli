@@ -145,7 +145,7 @@ public class Sandwich extends Product{
 
     @Override
     public String toString() {
-        return "Sandwich{" +
+        return "Sandwich: " +
                 "size=" + size +
                 ", breadType='" + breadType + '\'' +
                 ", meats=" + meats +
@@ -156,7 +156,6 @@ public class Sandwich extends Product{
                 ", sauces=" + sauces +
                 ", sides=" + sides +
                 ", toasted=" + toasted +
-                ", price=" + price +
                 '}';
     }
 }

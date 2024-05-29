@@ -31,10 +31,6 @@ public class Drink extends Product{
 
     @Override
     public String toString() {
-        return "Drink{" +
-                "size='" + size + '\'' +
-                ", flavor='" + flavor + '\'' +
-                ", price=" + price +
-                '}';
+        return "Drink: " + size + " " + flavor;
     }
 }
