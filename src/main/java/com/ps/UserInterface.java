@@ -74,9 +74,10 @@ public class UserInterface {
                         break;
                     case 2:
                         Drink drink = createDrink();
+                        currentOrder.addProduct(drink);
                         break;
                     case 3:
-                        //chips
+                        //chip
                         break;
                     case 4:
                         //checkout
@@ -489,7 +490,88 @@ public class UserInterface {
         return sandwich;
     }
 
-    private Drink createDrink(){
+    private Drink createDrink() {
+
+        String size = null;
+        String flavor = null;
+
+        do {
+
+            System.out.println("Select drink size:");
+            System.out.println("1) Small");
+            System.out.println("2) Medium");
+            System.out.println("3) Large");
+
+            try {
+                int sizeChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (sizeChoice) {
+                    case 1:
+                        size = "Small";
+                        break;
+                    case 2:
+                        size = "Medium";
+                        break;
+                    case 3:
+                        size = "Large";
+                        break;
+                    default:
+                        System.out.println("Size does not exist. Please try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Make sure you enter a number.");
+                scanner.next();
+            }
+        } while (size == null);
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        do {
+
+            System.out.println("Select the flavor for your drink:");
+            System.out.println("1) Coke");
+            System.out.println("2) Fanta");
+            System.out.println("3) Hi-C");
+            System.out.println("4) Dr. Pepper");
+            System.out.println("5) Pepsi");
+            System.out.println("6) Sprite");
+
+            try {
+                int flavorChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (flavorChoice) {
+                    case 1:
+                        flavor = "Coke";
+                        break;
+                    case 2:
+                        flavor = "Fanta";
+                        break;
+                    case 3:
+                        flavor = "Hi-C";
+                        break;
+                    case 4:
+                        flavor = "Dr. Pepper";
+                        break;
+                    case 5:
+                        flavor = "Pepsi";
+                        break;
+                    case 6:
+                        flavor = "Sprite";
+                        break;
+                    default:
+                        System.out.println("Flavor does not exist. Please try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Make sure you enter a number.");
+                scanner.next();
+            }
+        } while (flavor == null);
+
+        Drink drink = new Drink(size, flavor);
+        System.out.println(drink);
+        return new Drink(size, flavor);
     }
 
 }
