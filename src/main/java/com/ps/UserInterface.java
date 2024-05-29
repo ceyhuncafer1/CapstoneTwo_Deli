@@ -83,7 +83,7 @@ public class UserInterface {
                         printCurrentOrder();
                         break;
                     case 4:
-                        //checkout
+                        checkout();
                         ordering = false;
                         break;
                     case 0:
@@ -312,6 +312,8 @@ public class UserInterface {
                 }else if(extraChoice == 0){
                     extraForCheese = false;
                     validInputForCheese = false;
+                } else{
+                    System.out.println("Make sure you pick 0 or 1");
                 }
             } catch(InputMismatchException e){
                 System.out.println("Invalid type.");
@@ -646,6 +648,10 @@ public class UserInterface {
         for (int i = products.size() - 1; i >= 0; i--) {
             System.out.println(products.get(i));
         }
+    }
+
+    private void checkout(){
+
     }
 
 
