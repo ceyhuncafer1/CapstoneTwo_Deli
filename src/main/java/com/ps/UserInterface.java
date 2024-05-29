@@ -597,7 +597,6 @@ public class UserInterface {
         } while (flavor == null);
 
         Drink drink = new Drink(size, flavor);
-        System.out.println(drink);
         return new Drink(size, flavor);
     }
 
@@ -645,7 +644,6 @@ public class UserInterface {
 
 
         Chip chip = new Chip(chipType);
-        System.out.println(chip);
         return new Chip(chipType);
     }
 
@@ -685,6 +683,8 @@ public class UserInterface {
             System.out.println("Order cancelled.");
             currentOrder = new Order();
         }
+
+        displayHomeScreen();
 
     }
 
