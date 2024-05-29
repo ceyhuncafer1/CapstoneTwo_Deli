@@ -95,7 +95,7 @@ public class UserInterface {
 
     private Sandwich createSandwich() {
 
-        Sandwich sandwich = null;
+        Sandwich sandwich;
         String breadType = null;
         int size = 0;
 
@@ -166,7 +166,6 @@ public class UserInterface {
         String meatType = null;
 
         do{
-
             System.out.println("Pick a meat:");
             System.out.println("1) Steak");
             System.out.println("2) Ham");
@@ -211,15 +210,33 @@ public class UserInterface {
 
         } while(meatType == null);
 
+        boolean extra = false;
+        
+        do{
+            System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
+            try{
+                int extraChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                if (extraChoice == 1) {
+                    extra = true;
+                } else
+                    extra = false;
+
+                sandwich.addMeat(meatType, extra);
+                
+            } catch(InputMismatchException e){
+                System.out.println("Invalid type.");
+                scanner.next();
+            }
+
+        } while(!extra);
+        
+
+        sandwich.addMeat(meatType, extra);
+
+        System.out.println(sandwich);
         return sandwich;
     }
 
-
-    //System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
-    // int extraChoice = scanner.nextInt();
-
-    // if (extraChoice == 1) {
-    //     extra = true;
-    //  } else
-    //     extra = false;
 }
