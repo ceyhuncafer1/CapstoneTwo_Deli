@@ -8,11 +8,13 @@ import java.util.Scanner;
 public class UserInterface {
 
     private Scanner scanner;
+    private Order currentOrder;
     int userHomeScreenChoice;
     int userOrderScreenChoice;
 
     public UserInterface(){
         scanner = new Scanner(System.in);
+        currentOrder = new Order();
     }
 
     public void displayHomeScreen() {
@@ -68,7 +70,7 @@ public class UserInterface {
                 switch (userOrderScreenChoice) {
                     case 1:
                         Sandwich sandwich = createSandwich();
-                        sandwiches.add(sandwich);
+                        currentOrder.addProduct(sandwich);
                         break;
                     case 2:
                         //drinks
@@ -132,7 +134,7 @@ public class UserInterface {
                 scanner.next();
             }
         } while (breadType == null);
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         do {
             System.out.println("Select sandwich size:");
             System.out.println("1) 4 inch");
@@ -164,7 +166,7 @@ public class UserInterface {
 
         sandwich = new Sandwich(size, breadType);
         String meatType = null;
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         do{
             System.out.println("You will now choose your meat-based toppings ");
             System.out.println("1) Steak");
@@ -212,7 +214,7 @@ public class UserInterface {
             }
 
         } while(meatType == null);
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         boolean extraForMeat = false;
         
         do{
@@ -235,7 +237,7 @@ public class UserInterface {
 
         sandwich.addMeat(meatType, extraForMeat);
 
-
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         String cheeseType = null;
 
         do{
@@ -279,7 +281,7 @@ public class UserInterface {
             }
 
         } while(cheeseType == null);
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         boolean extraForCheese = false;
 
         do{
@@ -300,6 +302,72 @@ public class UserInterface {
         } while(!extraForCheese);
 
         sandwich.addCheese(cheeseType, extraForMeat);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+       String toppingType = null;
+
+        do{
+
+            System.out.println("You will now choose your regular toppings: ");
+            System.out.println("1) Lettuce");
+            System.out.println("2) Peppers");
+            System.out.println("3) Onions");
+            System.out.println("4) Tomatoes");
+            System.out.println("5) Jalapenos");
+            System.out.println("6) Cucumbers");
+            System.out.println("7) Pickles");
+            System.out.println("8) Guacamole");
+            System.out.println("9) Mushrooms");
+
+            try{
+
+                int toppingChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (toppingChoice) {
+                    case 1:
+                        toppingType = "Lettuce";
+                        break;
+                    case 2:
+                        toppingType = "Peppers";
+                        break;
+                    case 3:
+                        toppingType = "Onions";
+                        break;
+                    case 4:
+                        toppingType = "Tomatoes";
+                        break;
+                    case 5:
+                        toppingType = "Jalapenos";
+                        break;
+                    case 6:
+                        toppingType = "Cucumbers";
+                        break;
+                    case 7:
+                        toppingType = "Pickles";
+                        break;
+                    case 8:
+                        toppingType = "Guacamole";
+                        break;
+                    case 9:
+                        toppingType = "Mushrooms";
+                        break;
+                    default:
+                        System.out.println("Invalid regular topping choice. Try again.");
+
+                }
+
+            } catch(InputMismatchException e){
+                System.out.println("Invalid Type - must be an integer");
+                scanner.next();
+            }
+
+        } while(toppingType == null);
+
+        sandwich.addRegularTopping(toppingType);
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         System.out.println(sandwich);
         return sandwich;
