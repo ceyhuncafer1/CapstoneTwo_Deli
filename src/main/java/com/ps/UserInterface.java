@@ -141,9 +141,9 @@ public class UserInterface {
             do {
 
                 System.out.println("Select sandwich size:");
-                System.out.println("1) 4\"");
-                System.out.println("2) 8\"");
-                System.out.println("3) 12\"");
+                System.out.println("1) 4 inch ");
+                System.out.println("2) 8 inch ");
+                System.out.println("3) 12 inch ");
 
                 int sizeChoice = scanner.nextInt();
                 scanner.nextLine();
@@ -159,7 +159,7 @@ public class UserInterface {
                         size = 12;
                         break;
                     default:
-                        System.out.println("Size does not exist. Please try again");
+                        System.out.println("Bread Size does not exist. Please try again");
                 }
 
             } while (size == 0);
