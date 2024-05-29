@@ -166,13 +166,14 @@ public class UserInterface {
         String meatType = null;
 
         do{
-            System.out.println("Pick a meat:");
+            System.out.println("You will now choose your meat-based toppings ");
             System.out.println("1) Steak");
             System.out.println("2) Ham");
             System.out.println("3) Salami");
             System.out.println("4) Roast Beef");
             System.out.println("5) Chicken");
             System.out.println("6) Bacon");
+            System.out.println("7) Vegetarian");
 
             try{
 
@@ -198,6 +199,8 @@ public class UserInterface {
                     case 6:
                         meatType = "Bacon";
                         break;
+                    case 7:
+                        meatType = "Vegetarian";
                     default:
                         System.out.println("Invalid meat choice. Try again.");
 
@@ -210,7 +213,7 @@ public class UserInterface {
 
         } while(meatType == null);
 
-        boolean extra = false;
+        boolean extraForMeat = false;
         
         do{
             System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
@@ -218,22 +221,68 @@ public class UserInterface {
                 int extraChoice = scanner.nextInt();
                 scanner.nextLine();
 
-                if (extraChoice == 1) {
-                    extra = true;
-                } else
-                    extra = false;
+                if(extraChoice == 1){
+                    extraForMeat = true;
+                }else
+                    extraForMeat = false;
 
-                sandwich.addMeat(meatType, extra);
+                sandwich.addMeat(meatType, extraForMeat);
                 
             } catch(InputMismatchException e){
                 System.out.println("Invalid type.");
                 scanner.next();
             }
 
-        } while(!extra);
-        
+        } while(!extraForMeat);
 
-        sandwich.addMeat(meatType, extra);
+        sandwich.addMeat(meatType, extraForMeat);
+
+
+        String cheeseType = null;
+
+        do{
+
+            System.out.println("Pick your cheese:");
+            System.out.println("1) Cheddar");
+            System.out.println("2) Mozzarella");
+            System.out.println("3) Gouda");
+            System.out.println("4) Provolone");
+            System.out.println("5) None");
+
+            try{
+
+                int cheeseChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (cheeseChoice) {
+                    case 1:
+                        cheeseType = "Cheddar";
+                        break;
+                    case 2:
+                        cheeseType = "Mozzarella";
+                        break;
+                    case 3:
+                        cheeseType = "Gouda";
+                        break;
+                    case 4:
+                        cheeseType = "Provolone";
+                        break;
+                    case 5:
+                        cheeseType = "None";
+                        break;
+                    default:
+                        System.out.println("Invalid cheese choice. Try again.");
+
+                }
+
+            } catch(InputMismatchException e){
+                System.out.println("Invalid type error");
+                scanner.next();
+            }
+
+        } while(cheeseType == null);
+        
+        sandwich.addCheese(cheeseType, extraForMeat);
 
         System.out.println(sandwich);
         return sandwich;
