@@ -445,6 +445,47 @@ public class UserInterface {
 
         sandwich.setToasted(isToasted);
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        String sideType = null;
+
+        do{
+
+            System.out.println("You will now choose your sides: ");
+            System.out.println("1) Au jus");
+            System.out.println("2) Extra sauce");
+            System.out.println("3) Nothing");
+
+            try{
+
+                int sideChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (sideChoice) {
+                    case 1:
+                        sideType = "Au jus";
+                        break;
+                    case 2:
+                        sideType = "Extra sauce";
+                        break;
+                    case 3:
+                        sideType = "Nothing";
+                        break;
+                    default:
+                        System.out.println("Invalid side choice. Try again.");
+                }
+
+            } catch(InputMismatchException e){
+                System.out.println("Invalid Type - must be an integer");
+                scanner.next();
+            }
+
+        } while(sideType == null);
+
+        sandwich.addSide(sideType);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
         System.out.println(sandwich);
         return sandwich;
     }

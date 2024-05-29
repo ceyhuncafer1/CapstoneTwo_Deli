@@ -14,6 +14,7 @@ public class Sandwich extends Product{
     private List<Boolean> extraCheeses;
     private List<String> regularToppings;
     private List<String> sauces;
+    private List<String> sides;
     private boolean toasted;
 
     public Sandwich(int size, String breadType) {
@@ -25,6 +26,11 @@ public class Sandwich extends Product{
         this.extraCheeses = new ArrayList<>();
         this.regularToppings = new ArrayList<>();
         this.sauces = new ArrayList<>();
+        this.sides = new ArrayList<>();
+    }
+
+    public void addSide(String side){
+        sides.add(side);
     }
 
     public void addMeat(String meat, boolean extra) {
@@ -139,9 +145,17 @@ public class Sandwich extends Product{
 
     @Override
     public String toString() {
-        return "Sandwich [size=" + size + "\", breadType=" + breadType + ", meats=" + meats + ", extraMeats=" + extraMeats +
-                ", cheeses=" + cheeses + ", extraCheeses=" + extraCheeses + ", regularToppings=" + regularToppings +
-                ", sauces=" + sauces + ", toasted=" + toasted + "]";
+        return "Sandwich{" +
+                "size=" + size +
+                ", breadType='" + breadType + '\'' +
+                ", meats=" + meats +
+                ", extraMeats=" + extraMeats +
+                ", cheeses=" + cheeses +
+                ", extraCheeses=" + extraCheeses +
+                ", regularToppings=" + regularToppings +
+                ", sauces=" + sauces +
+                ", sides=" + sides +
+                ", toasted=" + toasted +
+                '}';
     }
-
 }
