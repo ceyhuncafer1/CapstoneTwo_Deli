@@ -99,18 +99,17 @@ public class UserInterface {
         String breadType = null;
         int size = 0;
 
-        try {
+        do {
+            System.out.println("Select your bread:");
+            System.out.println("1) White");
+            System.out.println("2) Wheat");
+            System.out.println("3) Rye");
+            System.out.println("4) Wrap");
 
-            do {
-
-                System.out.println("Select your bread:");
-                System.out.println("1) White");
-                System.out.println("2) Wheat");
-                System.out.println("3) Rye");
-                System.out.println("4) Wrap");
+            try {
 
                 int breadChoice = scanner.nextInt();
-                scanner.nextLine(); // consume newline
+                scanner.nextLine();
 
                 switch (breadChoice) {
                     case 1:
@@ -126,25 +125,21 @@ public class UserInterface {
                         breadType = "Wrap";
                         break;
                     default:
-                        System.out.println("Bread does not exist. Please try again");
+                        System.out.println("Bread type does not exist. Please try again.");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+            }
+        } while (breadType == null);
 
-            } while (breadType == null);
+        do {
+            System.out.println("Select sandwich size:");
+            System.out.println("1) 4 inch");
+            System.out.println("2) 8 inch");
+            System.out.println("3) 12 inch");
 
-        } catch(Exception e){
-            System.out.println("Error for bread type");
-        }
-
-            ///////////////////////////////////////////////
-
-        try {
-            do {
-
-                System.out.println("Select sandwich size:");
-                System.out.println("1) 4 inch ");
-                System.out.println("2) 8 inch ");
-                System.out.println("3) 12 inch ");
-
+            try {
                 int sizeChoice = scanner.nextInt();
                 scanner.nextLine();
 
@@ -159,78 +154,72 @@ public class UserInterface {
                         size = 12;
                         break;
                     default:
-                        System.out.println("Bread Size does not exist. Please try again");
+                        System.out.println("Size does not exist. Please try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+            }
+        } while (size == 0);
+
+        sandwich = new Sandwich(size, breadType);
+        String meatType = null;
+
+        do{
+
+            System.out.println("Pick a meat:");
+            System.out.println("1) Steak");
+            System.out.println("2) Ham");
+            System.out.println("3) Salami");
+            System.out.println("4) Roast Beef");
+            System.out.println("5) Chicken");
+            System.out.println("6) Bacon");
+
+            try{
+
+                int meatChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (meatChoice) {
+                    case 1:
+                        meatType = "Steak";
+                        break;
+                    case 2:
+                        meatType = "Ham";
+                        break;
+                    case 3:
+                        meatType = "Salami";
+                        break;
+                    case 4:
+                        meatType = "Roast Beef";
+                        break;
+                    case 5:
+                        meatType = "Chicken";
+                        break;
+                    case 6:
+                        meatType = "Bacon";
+                        break;
+                    default:
+                        System.out.println("Invalid meat choice. Try again.");
+
                 }
 
-            } while (size == 0);
+            } catch(InputMismatchException e){
+                System.out.println("Invalid Type - must be an integer");
+                scanner.next();
+            }
 
-            sandwich = new Sandwich(size, breadType);
-
-        } catch(Exception e) {
-            System.out.println("Error for size");
-        }
-
-            //////////////////////////////////////////////////////////////////////////
-
-            int meatChoice = 0;
-            String meatType = null;
-            boolean extra = false;
-
-            try {
-
-                do {
-
-                    System.out.println("Pick a meat:");
-                    System.out.println("1) Steak");
-                    System.out.println("2) Ham");
-                    System.out.println("3) Salami");
-                    System.out.println("4) Roast Beef");
-                    System.out.println("5) Chicken");
-                    System.out.println("6) Bacon");
-
-                    meatChoice = scanner.nextInt();
-                    scanner.nextLine();
-
-                    switch (meatChoice) {
-                        case 1:
-                            meatType = "Steak";
-                            break;
-                        case 2:
-                            meatType = "Ham";
-                            break;
-                        case 3:
-                            meatType = "Salami";
-                            break;
-                        case 4:
-                            meatType = "Roast Beef";
-                            break;
-                        case 5:
-                            meatType = "Chicken";
-                            break;
-                        case 6:
-                            meatType = "Bacon";
-                            break;
-                        default:
-                            System.out.println("Invalid meat choice. Try again.");
-
-                    }
-
-                    //System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
-                    // int extraChoice = scanner.nextInt();
-
-                    // if (extraChoice == 1) {
-                    //     extra = true;
-                    //  } else
-                    //     extra = false;
-
-                } while (meatType == null);
-            } catch(Exception e) {
-                System.out.println("Error for meat type");}
-
-            //sandwich.addMeat(meatType, extra);
-            System.out.println(sandwich);
-
+        } while(meatType == null);
 
         return sandwich;
     }
+
+
+    //System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
+    // int extraChoice = scanner.nextInt();
+
+    // if (extraChoice == 1) {
+    //     extra = true;
+    //  } else
+    //     extra = false;
 }
