@@ -8,11 +8,25 @@ public class Drink extends Product{
     public Drink(String size, String flavor) {
         this.size = size;
         this.flavor = flavor;
+        calcPrice();
     }
 
     @Override
     public double calcPrice() {
-        return 0;
+
+        switch (size) {
+            case "Small":
+                price = 2.00;
+                break;
+            case "Medium":
+                price = 2.50;
+                break;
+            case "Large":
+                price = 3.00;
+                break;
+        }
+
+        return price;
     }
 
     @Override
@@ -20,6 +34,7 @@ public class Drink extends Product{
         return "Drink{" +
                 "size='" + size + '\'' +
                 ", flavor='" + flavor + '\'' +
+                ", price=" + price +
                 '}';
     }
 }

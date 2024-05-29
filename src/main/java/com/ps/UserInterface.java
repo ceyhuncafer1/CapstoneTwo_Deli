@@ -73,7 +73,7 @@ public class UserInterface {
                         currentOrder.addProduct(sandwich);
                         break;
                     case 2:
-                        //drinks
+                        Drink drink = createDrink();
                         break;
                     case 3:
                         //chips
@@ -485,9 +485,11 @@ public class UserInterface {
         sandwich.addSide(sideType);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
         System.out.println(sandwich);
         return sandwich;
+    }
+
+    private Drink createDrink(){
     }
 
 }
