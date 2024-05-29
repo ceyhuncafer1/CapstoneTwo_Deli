@@ -298,6 +298,7 @@ public class UserInterface {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         boolean extraForCheese = false;
+        boolean validInputForCheese = false;
 
         do{
             System.out.println("Do you want extra cheese? (1 = yes , 0 = no)");
@@ -307,16 +308,19 @@ public class UserInterface {
 
                 if(extraChoice == 1){
                     extraForCheese = true;
-                }else
+                    validInputForCheese = true;
+                }else if(extraChoice == 0){
                     extraForCheese = false;
+                    validInputForCheese = false;
+                }
             } catch(InputMismatchException e){
                 System.out.println("Invalid type.");
                 scanner.next();
             }
 
-        } while(!extraForCheese);
+        } while(!validInputForCheese);
 
-        sandwich.addCheese(cheeseType, extraForMeat);
+        sandwich.addCheese(cheeseType, extraForCheese);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
