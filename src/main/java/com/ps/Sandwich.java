@@ -55,7 +55,7 @@ public class Sandwich extends Product{
         this.toasted = toasted;
     }
 
-    private double getBasePrice() {
+    private double getBreadPrice() {
         switch (size) {
             case 4:
                 return 5.50;
@@ -122,7 +122,7 @@ public class Sandwich extends Product{
 
     @Override
     public double calcPrice() {
-        price = getBasePrice();
+        price = getBreadPrice();
 
         for (int i = 0; i < meats.size(); i++) {
             if (extraMeats.get(i)) {
@@ -156,6 +156,7 @@ public class Sandwich extends Product{
                 ", sauces=" + sauces +
                 ", sides=" + sides +
                 ", toasted=" + toasted +
+                ", price=" + price +
                 '}';
     }
 }

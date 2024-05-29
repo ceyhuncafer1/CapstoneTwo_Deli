@@ -311,7 +311,7 @@ public class UserInterface {
                     validInputForCheese = true;
                 }else if(extraChoice == 0){
                     extraForCheese = false;
-                    validInputForCheese = false;
+                    validInputForCheese = true;
                 } else{
                     System.out.println("Make sure you pick 0 or 1");
                 }
@@ -446,6 +446,7 @@ public class UserInterface {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         boolean isToasted = false;
+        boolean validInputForToast = false;
 
         do{
             System.out.println("Do you want your sandwich toasted? (1 = yes , 0 = no)");
@@ -455,14 +456,20 @@ public class UserInterface {
 
                 if(extraChoice == 1){
                     isToasted = true;
-                }else
+                    validInputForToast = true;
+                }else if(extraChoice == 0){
                     isToasted = false;
+                    validInputForToast = true;
+
+                } else{
+                    System.out.println("Make sure you pick 0 or 1");
+                }
             } catch(InputMismatchException e){
                 System.out.println("Invalid type.");
                 scanner.next();
             }
 
-        } while(!isToasted);
+        } while(!validInputForToast);
 
         sandwich.setToasted(isToasted);
 
@@ -643,14 +650,26 @@ public class UserInterface {
     }
 
     private void printCurrentOrder() {
-        System.out.println("Current order:");
+
         List<Product> products = currentOrder.getProducts();
+        System.out.println("Your Current order:");
+
+        double totalCost = 0;
+
         for (int i = products.size() - 1; i >= 0; i--) {
-            System.out.println(products.get(i));
+            Product product = products.get(i);
+            double productPrice = product.calcPrice();
+            System.out.println(product);
+            totalCost += productPrice;
         }
+
+        System.out.println("Total: $" + totalCost);
     }
 
     private void checkout(){
+
+        printCurrentOrder();
+
 
     }
 
