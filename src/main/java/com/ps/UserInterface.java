@@ -369,6 +369,60 @@ public class UserInterface {
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        String sauceType = null;
+
+        do{
+
+            System.out.println("You will now choose your sauces: ");
+            System.out.println("1) Mayonnaise");
+            System.out.println("2) Mustard");
+            System.out.println("3) Ketchup");
+            System.out.println("4) Ranch");
+            System.out.println("5) Thousand Island");
+            System.out.println("6) Vinaigrette");
+            System.out.println("7) None");
+
+            try{
+
+                int sauceChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (sauceChoice) {
+                    case 1:
+                        sauceType = "Mayonnaise";
+                        break;
+                    case 2:
+                        sauceType = "Mustard";
+                        break;
+                    case 3:
+                        sauceType = "Ketchup";
+                        break;
+                    case 4:
+                        sauceType = "Ranch";
+                        break;
+                    case 5:
+                        sauceType = "Thousand Island";
+                        break;
+                    case 6:
+                        sauceType = "Vinaigrette";
+                        break;
+                    case 7:
+                        sauceType = "None";
+                        break;
+                    default:
+                        System.out.println("Invalid sauce choice. Try again.");
+
+                }
+
+            } catch(InputMismatchException e){
+                System.out.println("Invalid Type - must be an integer");
+                scanner.next();
+            }
+
+        } while(sauceType == null);
+
+        sandwich.addSauce(sauceType);
+
         System.out.println(sandwich);
         return sandwich;
     }
