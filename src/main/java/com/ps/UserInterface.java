@@ -51,7 +51,6 @@ public class UserInterface {
 
     public void displayOrderScreen() {
 
-        List<Sandwich> sandwiches = new ArrayList<>();
         boolean ordering = true;
 
         while (ordering) {
@@ -77,7 +76,8 @@ public class UserInterface {
                         currentOrder.addProduct(drink);
                         break;
                     case 3:
-                        //chip
+                        Chip chip = createChip();
+                        currentOrder.addProduct(chip);
                         break;
                     case 4:
                         //checkout
@@ -135,7 +135,9 @@ public class UserInterface {
                 scanner.next();
             }
         } while (breadType == null);
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         do {
             System.out.println("Select sandwich size:");
             System.out.println("1) 4 inch");
@@ -215,9 +217,11 @@ public class UserInterface {
             }
 
         } while(meatType == null);
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         boolean extraForMeat = false;
-        
+
         do{
             System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
             try{
@@ -228,7 +232,7 @@ public class UserInterface {
                     extraForMeat = true;
                 }else
                     extraForMeat = false;
-                
+
             } catch(InputMismatchException e){
                 System.out.println("Invalid type.");
                 scanner.next();
@@ -238,7 +242,8 @@ public class UserInterface {
 
         sandwich.addMeat(meatType, extraForMeat);
 
- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         String cheeseType = null;
 
         do{
@@ -282,7 +287,9 @@ public class UserInterface {
             }
 
         } while(cheeseType == null);
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         boolean extraForCheese = false;
 
         do{
@@ -306,7 +313,7 @@ public class UserInterface {
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-       String toppingType = null;
+        String toppingType = null;
 
         do{
 
@@ -572,6 +579,54 @@ public class UserInterface {
         Drink drink = new Drink(size, flavor);
         System.out.println(drink);
         return new Drink(size, flavor);
+    }
+
+    private Chip createChip() {
+
+        String chipType = null;
+
+        do {
+
+            System.out.println("Select the type of chips you want:");
+            System.out.println("1) Lays BBQ");
+            System.out.println("2) Cheetos Crunchy");
+            System.out.println("3) Ruffles Sour Cream and Onion");
+            System.out.println("4) Ruffles Cheddar Cheese");
+            System.out.println("5) Sun Chips Classic");
+
+            try {
+                int chipChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (chipChoice) {
+                    case 1:
+                        chipType = "Lays BBQ";
+                        break;
+                    case 2:
+                        chipType = "Cheetos Crunchy";
+                        break;
+                    case 3:
+                        chipType = "Ruffles Sour Cream and Onion";
+                        break;
+                    case 4:
+                        chipType = "Ruffles Cheddar Cheese";
+                        break;
+                    case 5:
+                        chipType = "Sun Chips Classic";
+                        break;
+                    default:
+                        System.out.println("Chip type does not exist. Please try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Make sure you enter a number.");
+                scanner.next();
+            }
+        } while (chipType == null);
+
+
+        Chip chip = new Chip(chipType);
+        System.out.println(chip);
+        return new Chip(chipType);
     }
 
 }
