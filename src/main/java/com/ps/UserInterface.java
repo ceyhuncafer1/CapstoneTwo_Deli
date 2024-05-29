@@ -224,24 +224,28 @@ public class UserInterface {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         boolean extraForMeat = false;
+        boolean validInput = false;
 
-        do{
+        do {
             System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
-            try{
+            try {
                 int extraChoice = scanner.nextInt();
                 scanner.nextLine();
 
-                if(extraChoice == 1){
+                if (extraChoice == 1) {
                     extraForMeat = true;
-                }else
+                    validInput = true;
+                } else if (extraChoice == 0) {
                     extraForMeat = false;
-
-            } catch(InputMismatchException e){
-                System.out.println("Invalid type.");
+                    validInput = true;
+                } else {
+                    System.out.println("Invalid choice. Please enter 1 or 0.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid type. Please enter a number.");
                 scanner.next();
             }
-
-        } while(!extraForMeat);
+        } while (!validInput);
 
         sandwich.addMeat(meatType, extraForMeat);
 
