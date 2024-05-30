@@ -1,0 +1,5 @@
+Transaction ID: Ga38NPsliQL
+Order details:
+Sandwich: size=4, breadType='White', meats=[Steak], extraMeats=[true], cheeses=[Cheddar], extraCheeses=[true], regularToppings=[Lettuce], sauces=[Mayonnaise], sides=[Au jus], toasted=true} - Price: $6.3
+Sandwich: size=8, breadType='Wheat', meats=[Ham], extraMeats=[true], cheeses=[Cheddar], extraCheeses=[true], regularToppings=[Peppers], sauces=[Mustard], sides=[Nothing], toasted=true} - Price: $8.6
+Total order cost: $14.899999999999999

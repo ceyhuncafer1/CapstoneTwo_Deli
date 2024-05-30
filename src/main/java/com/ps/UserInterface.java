@@ -171,7 +171,9 @@ public class UserInterface {
 
         sandwich = new Sandwich(size, breadType);
         String meatType = null;
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         do{
             System.out.println("You will now choose your meat-based toppings ");
             System.out.println("1) Steak");
@@ -180,7 +182,6 @@ public class UserInterface {
             System.out.println("4) Roast Beef");
             System.out.println("5) Chicken");
             System.out.println("6) Bacon");
-            System.out.println("7) Vegetarian");
 
             try{
 
@@ -206,8 +207,6 @@ public class UserInterface {
                     case 6:
                         meatType = "Bacon";
                         break;
-                    case 7:
-                        meatType = "Vegetarian";
                     default:
                         System.out.println("Invalid meat choice. Try again.");
 
@@ -645,6 +644,10 @@ public class UserInterface {
     }
 
     private void printCurrentOrder() {
+
+        String GREEN = "\u001B[32m";
+        String RESET = "\u001B[0m";
+
         List<Product> products = currentOrder.getProducts();
 
         System.out.println("\nYour Current Order:");
@@ -655,12 +658,12 @@ public class UserInterface {
         for (int i = products.size() - 1; i >= 0; i--) {
             Product product = products.get(i);
             double productPrice = product.calcPrice();
-            System.out.printf("%-25s $%.2f%n", product, productPrice);
+            System.out.printf("%-1s " + GREEN + "$%.2f" + RESET + "%n", product, productPrice);
             totalCost += productPrice;
         }
 
         System.out.println("-------------------------------");
-        System.out.printf("Total: $%.2f%n", totalCost);
+        System.out.printf("Total: " + GREEN + "$%.2f" + RESET + "%n", totalCost);
         System.out.println();
     }
 

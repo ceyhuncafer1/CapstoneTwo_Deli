@@ -1,0 +1,7 @@
+Transaction ID: PpQf1Uxxew2
+Order details:
+Sandwich: size=12, breadType='Wrap', meats=[Chicken], extraMeats=[false], cheeses=[None], extraCheeses=[false], regularToppings=[Cucumbers], sauces=[Vinaigrette], sides=[Extra sauce], toasted=true} - Price: $13.75
+Drink: Large Coke - Price: $3.0
+Chips: Sun Chips Classic - Price: $1.5
+Sandwich: size=8, breadType='White', meats=[Bacon], extraMeats=[true], cheeses=[Provolone], extraCheeses=[true], regularToppings=[Lettuce], sauces=[Thousand Island], sides=[Nothing], toasted=true} - Price: $8.6
+Total order cost: $26.85
