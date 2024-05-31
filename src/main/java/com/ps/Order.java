@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Order {
 
-    private List<Product> products;
+    private List<Product> products; // store all the products to add and get products
 
     public Order(){
         products = new ArrayList<>();
@@ -22,16 +22,23 @@ public class Order {
     @Override
     public String toString() {
 
+        /*
+        UserInterface calls FileManager which takes a parameter of the current order which we then can now use the .toString() and
+        retrieve the current order and print it to the receipt.
+         */
+
         String receiptOutput = "Order details:\n";
         double totalCost = 0;
 
         for (Product product : products) {
-            double productPrice = product.calcPrice();
+
+            double productPrice = product.calcPrice(); // refer to product class
             receiptOutput += product + " - Price: $" + productPrice + "\n";
             totalCost += productPrice;
+
         }
 
-        receiptOutput += "Total order cost: $" + totalCost + "\n";
+        receiptOutput += "\nTotal order cost: $" + totalCost + "\n";
         return receiptOutput;
 
     }

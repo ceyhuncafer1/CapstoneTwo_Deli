@@ -55,6 +55,11 @@ public class Sandwich extends Product{
         this.toasted = toasted;
     }
 
+    /*
+    Here we use size as the case for our switch because when doing our calcPrice() this will make it easy to get the values for each price
+    as the size will stay consistent for the topping. We will use the corresponding price for the size of the bread
+     */
+
     private double getBreadPrice() {
         switch (size) {
             case 4:
@@ -122,8 +127,10 @@ public class Sandwich extends Product{
 
     @Override
     public double calcPrice() {
+        // initialize the price with the bread as its the first option always
         price = getBreadPrice();
 
+        // each meat topping based on how many meat toppings there are (meats.size() = length of the list to iterate so we keep adding to price
         for (int i = 0; i < meats.size(); i++) {
             if (extraMeats.get(i)) {
                 price += getExtraMeatPrice();

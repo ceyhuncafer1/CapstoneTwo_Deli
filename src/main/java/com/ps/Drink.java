@@ -8,7 +8,7 @@ public class Drink extends Product{
     public Drink(String size, String flavor) {
         this.size = size;
         this.flavor = flavor;
-        calcPrice();
+        calcPrice(); // we must initialize the price of the drink based on it's size when we create a new Drink object
     }
 
     @Override

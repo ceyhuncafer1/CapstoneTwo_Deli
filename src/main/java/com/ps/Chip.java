@@ -11,7 +11,7 @@ public class Chip extends Product{
 
     @Override
     public double calcPrice() {
-        return 1.50;
+        return 1.50; // all chips are 1.50
     }
 
     public String getChipType() {

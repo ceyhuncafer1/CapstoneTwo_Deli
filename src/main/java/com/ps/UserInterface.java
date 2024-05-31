@@ -6,34 +6,42 @@ import java.util.Scanner;
 
 public class UserInterface {
 
+
+
     private Scanner scanner;
-    private Order currentOrder;
+    private Order currentOrder; // we must have a variable of type Order to act as a folder for all of the products and also for the ongoing order
     int userHomeScreenChoice;
     int userOrderScreenChoice;
 
+    // colored text
     String BLUE = "\u001B[34m";
     String RED = "\u001B[31m";
     String GREEN = "\u001B[32m";
     String RESET = "\u001B[0m";
 
+    //initialize object
     public UserInterface(){ // constructor
         scanner = new Scanner(System.in);
         currentOrder = new Order();
     }
 
     public void displayHomeScreen() {
-        boolean validInput = false;
 
+        boolean validInput = false; // flag to check input is valid
+
+        // we will keep doing this until the user enters a proper input
         do {
-            System.out.println("Welcome to DELI-CIOUS!");
+            System.out.println("Welcome to DELI-CIOUS!"); // home screen
             System.out.println("Pick an option:");
             System.out.println("1) New Order");
             System.out.println("0) Exit Deli App");
 
             try {
-                userHomeScreenChoice = scanner.nextInt();
-                scanner.nextLine();
 
+                userHomeScreenChoice = scanner.nextInt();
+                scanner.nextLine();// .nextInt() makes it so theres an empty space. this gets rid of it, so it actually reads the user's next input
+
+                //if the input is 1 or 0 we will let them go to these cases. (error handling)
                 if (userHomeScreenChoice == 1 || userHomeScreenChoice == 0) {
                     validInput = true;
                     switch (userHomeScreenChoice) {
@@ -56,10 +64,12 @@ public class UserInterface {
 
     public void displayOrderScreen() {
 
-        boolean ordering = true;
+        boolean ordering = true; // control loop, break if they want to cancel order or checkout
 
+        // keep displaying this screen until user cancels order or checks out
         while (ordering) {
 
+            // order menu
             System.out.println("Order Screen");
             System.out.println("1) Add Sandwich");
             System.out.println("2) Add Drink");
@@ -73,9 +83,9 @@ public class UserInterface {
 
                 switch (userOrderScreenChoice) {
                     case 1:
-                        Sandwich sandwich = createSandwich();
-                        currentOrder.addProduct(sandwich);
-                        printCurrentOrder();
+                        Sandwich sandwich = createSandwich(); // instance of Sandwich class called sandwich equals createSandwich() which returns sandwich object with new properties
+                        currentOrder.addProduct(sandwich); // sandwich object is then added to currentOrder using addProduct() in Order class
+                        printCurrentOrder(); // users current order printed to screen
                         break;
                     case 2:
                         Drink drink = createDrink();
@@ -106,6 +116,7 @@ public class UserInterface {
 
     private Sandwich createSandwich() {
 
+        // declare sandwich object to be returned by this method
         Sandwich sandwich;
         String breadType = null;
         int size = 0;
@@ -136,13 +147,13 @@ public class UserInterface {
                         breadType = "Wrap";
                         break;
                     default:
-                        System.out.println("Bread type does not exist. Please try again.");
+                        System.out.println("Bread type does not exist. Please try again."); // if the user choice isn't 1-4 print this
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
                 scanner.next();
             }
-        } while (breadType == null);
+        } while (breadType == null); // continue looping until case 1-4 is selected which will make breadType not null and exit the loop
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -176,15 +187,15 @@ public class UserInterface {
             }
         } while (size == 0);
 
-        sandwich = new Sandwich(size, breadType);
+        sandwich = new Sandwich(size, breadType); // our sandwich constructor takes the two parameters (size, breadType) to be made, so we will now make it with this information and continue on with the rest of its properties
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        int meatCount = 0;
-        int maxMeatCount = 6;
-        boolean addingMeat = true;
+        int meatCount = 0; // counter for number of meats user selects
+        int maxMeatCount = 6; // if it hits 6 we will force stop user and go to next screen
+        boolean addingMeat = true; // flag in case user is done after 1 and wants to exit screen earlier
         String meatType = null;
-        boolean extraForMeat = false;
+        boolean extraForMeat = false; // is extra meat requested
         boolean validInput = false;
 
 
@@ -285,12 +296,14 @@ public class UserInterface {
 
         } while (addingMeat);
 
-        sandwich.addMeat(meatType, extraForMeat);
+        sandwich.addMeat(meatType, extraForMeat); // add properties to  sandwich
 
         System.out.println("You have finished selecting meat-based toppings.");
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+        //same as meat and meat extra
         String cheeseType = null;
         int cheeseCount = 0;
         int maxCheeseCount = 4;
@@ -348,11 +361,15 @@ public class UserInterface {
                             scanner.nextLine();
 
                             if(extraChoice == 1){
+
                                 extraForCheese = true;
                                 validInputForCheese = true;
+
                             }else if(extraChoice == 0){
+
                                 extraForCheese = false;
                                 validInputForCheese = true;
+
                             } else{
                                 System.out.println("Make sure you pick 0 or 1");
                             }
@@ -387,6 +404,7 @@ public class UserInterface {
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        // same and meat and meat extra, however there is no limit on the amount of toppings so the user will end up pressing 0 to get out of this screen
         String toppingType = null;
         boolean addingToppings = true;
 
@@ -458,7 +476,7 @@ public class UserInterface {
                 scanner.next();
             }
 
-        } while (addingToppings);
+        } while (addingToppings); // while this is true it will keep asking them what toppings they want. when they press 0 break out of loop and go to next screen
 
         System.out.println("You have finished selecting regular toppings.");
 
@@ -516,22 +534,29 @@ public class UserInterface {
 
         } while(sauceType == null);
 
-        sandwich.addSauce(sauceType);
+        sandwich.addSauce(sauceType); // add property
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         boolean isToasted = false;
         boolean validInputForToast = false;
 
         do{
+
             System.out.println("Do you want your sandwich toasted? (1 = yes , 0 = no)");
+
             try{
+
                 int extraChoice = scanner.nextInt();
                 scanner.nextLine();
 
                 if(extraChoice == 1){
+
                     isToasted = true;
                     validInputForToast = true;
+
                 }else if(extraChoice == 0){
+
                     isToasted = false;
                     validInputForToast = true;
 
@@ -585,7 +610,9 @@ public class UserInterface {
         } while(sideType == null);
 
         sandwich.addSide(sideType);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         return sandwich;
     }
 
@@ -713,21 +740,29 @@ public class UserInterface {
             }
         } while (chipType == null);
 
-        return new Chip(chipType);
+        return new Chip(chipType); // constructor parameter requires only chipType
     }
 
     private void printCurrentOrder() {
 
-        List<Product> products = currentOrder.getProducts();
+        List<Product> products = currentOrder.getProducts(); // create a list of products based on the currentOrder using .getProducts()
 
         System.out.println("\nYour Current Order:");
         System.out.println("-------------------------------");
 
-        double totalCost = 0;
+        double totalCost = 0; // will be used to store total cost of all products in this products list
 
-        for (int i = products.size() - 1; i >= 0; i--) {
+        for (int i = products.size() - 1; i >= 0; i--) { // length of the products list, so for example if they have 1 sandwich size = 1  and i-- will go to 0 in 1 iteration and only print the sandwich.
             Product product = products.get(i); // access each individual product object in the products list during the loop's iteration
             double productPrice = product.calcPrice();
+
+            /*
+            calcPrice() is an abstract class in Product meaning it will not have any implementation but it means
+            it must be implemented in the subclasses (Sandwich, Drink, Chip)
+            So basically it just calculates the price of each product as each product has unique prices.
+            We use total cost with that defined in this scope to easily get the total cost.
+
+             */
             System.out.printf("%-1s " + GREEN + "$%.2f" + RESET + "%n", product, productPrice);
             totalCost += productPrice;
         }
@@ -748,10 +783,16 @@ public class UserInterface {
 
         if (ans == 1) {
 
+            /*
+            If user confirms the order we must create a new instance of the fileManager class
+            this instance will be called by the saveReceipt() method which takes in the parameters of the current order
+            We need the current order as a parameter to call its methods like .toString() to put on the receipt for relevant information.
+             */
+
             FileManager receiptFileManager = new FileManager();
             receiptFileManager.saveReceipt(currentOrder);
             System.out.println("Order confirmed and receipt saved.");
-            currentOrder = new Order();
+            currentOrder = new Order(); // clear current order and go back to home screen
 
         } else {
             System.out.println("Order cancelled.");
