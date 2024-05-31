@@ -16,6 +16,11 @@ Which then they could now make a sandwich and fully customize:
 
 ![image](https://github.com/ninjakid56810/CapstoneTwo_Deli/assets/70558570/6ad9dc89-ed48-4731-91d0-f3e5e0653eb8) ![image](https://github.com/ninjakid56810/CapstoneTwo_Deli/assets/70558570/dec30d89-6ca0-40ee-a5a9-0b3f240523d4) ![image](https://github.com/ninjakid56810/CapstoneTwo_Deli/assets/70558570/71270289-6d62-426a-ab54-064089a59433)
 
+Checkout:
+
+![image](https://github.com/ninjakid56810/CapstoneTwo_Deli/assets/70558570/32171585-ff6b-4b9b-9d1c-af364697a619)
+
+
 One thing to mention is that i kept the option type consistent. When testing, pressing between 1 and 0 for all my options was nice, rather than having the user have to type anything out at all.
 
 ## OOP Implementation
