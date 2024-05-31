@@ -11,7 +11,12 @@ public class UserInterface {
     int userHomeScreenChoice;
     int userOrderScreenChoice;
 
-    public UserInterface(){
+    String BLUE = "\u001B[34m";
+    String RED = "\u001B[31m";
+    String GREEN = "\u001B[32m";
+    String RESET = "\u001B[0m";
+
+    public UserInterface(){ // constructor
         scanner = new Scanner(System.in);
         currentOrder = new Order();
     }
@@ -20,6 +25,7 @@ public class UserInterface {
         boolean validInput = false;
 
         do {
+            System.out.println("Welcome to DELI-CIOUS!");
             System.out.println("Pick an option:");
             System.out.println("1) New Order");
             System.out.println("0) Exit Deli App");
@@ -147,6 +153,7 @@ public class UserInterface {
             System.out.println("3) 12 inch");
 
             try {
+
                 int sizeChoice = scanner.nextInt();
                 scanner.nextLine();
 
@@ -170,95 +177,137 @@ public class UserInterface {
         } while (size == 0);
 
         sandwich = new Sandwich(size, breadType);
-        String meatType = null;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        do{
-            System.out.println("You will now choose your meat-based toppings ");
+        int meatCount = 0;
+        int maxMeatCount = 6;
+        boolean addingMeat = true;
+        String meatType = null;
+        boolean extraForMeat = false;
+        boolean validInput = false;
+
+
+        System.out.println("You will now choose your meat-based toppings: ");
+
+        do {
+
             System.out.println("1) Steak");
             System.out.println("2) Ham");
             System.out.println("3) Salami");
             System.out.println("4) Roast Beef");
             System.out.println("5) Chicken");
             System.out.println("6) Bacon");
+            System.out.println("0) Done");
 
-            try{
-
+            try {
                 int meatChoice = scanner.nextInt();
                 scanner.nextLine();
 
                 switch (meatChoice) {
                     case 1:
                         meatType = "Steak";
+                        System.out.println("You picked: Steak");
                         break;
                     case 2:
                         meatType = "Ham";
+                        System.out.println("You picked: Ham");
                         break;
                     case 3:
                         meatType = "Salami";
+                        System.out.println("You picked: Salami");
                         break;
                     case 4:
                         meatType = "Roast Beef";
+                        System.out.println("You picked: Roast Beef");
                         break;
                     case 5:
                         meatType = "Chicken";
+                        System.out.println("You picked: Chicken");
                         break;
                     case 6:
                         meatType = "Bacon";
+                        System.out.println("You picked: Bacon");
+                        break;
+                    case 0:
+                        addingMeat = false;
                         break;
                     default:
                         System.out.println("Invalid meat choice. Try again.");
+                        continue;
+                }
+
+                if(meatChoice != 0){
+
+                    do {
+                        System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
+                        try {
+                            int extraChoice = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if (extraChoice == 1) {
+
+                                extraForMeat = true;
+                                validInput = true;
+
+                            } else if (extraChoice == 0) {
+
+                                extraForMeat = false;
+                                validInput = true;
+
+                            } else {
+                                System.out.println("Invalid choice. Please enter 1 or 0.");
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid type. Please enter a number.");
+                            scanner.next();
+                        }
+                    } while (!validInput);
 
                 }
 
-            } catch(InputMismatchException e){
+                if (meatChoice >= 1 && meatChoice <= 6) {
+                    meatCount++;
+                }
+
+                if (meatCount >= maxMeatCount) {
+                    System.out.println("You have reached the maximum number of meat-based toppings.");
+                    addingMeat = false;
+                }
+
+
+            } catch (InputMismatchException e) {
                 System.out.println("Invalid Type - must be an integer");
                 scanner.next();
             }
 
-        } while(meatType == null);
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        boolean extraForMeat = false;
-        boolean validInput = false;
-
-        do {
-            System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
-            try {
-                int extraChoice = scanner.nextInt();
-                scanner.nextLine();
-
-                if (extraChoice == 1) {
-                    extraForMeat = true;
-                    validInput = true;
-                } else if (extraChoice == 0) {
-                    extraForMeat = false;
-                    validInput = true;
-                } else {
-                    System.out.println("Invalid choice. Please enter 1 or 0.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid type. Please enter a number.");
-                scanner.next();
-            }
-        } while (!validInput);
+        } while (addingMeat);
 
         sandwich.addMeat(meatType, extraForMeat);
+
+        System.out.println("You have finished selecting meat-based toppings.");
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         String cheeseType = null;
+        int cheeseCount = 0;
+        int maxCheeseCount = 4;
+        boolean addingCheese = true;
+        boolean extraForCheese = false;
+        boolean validInputForCheese = false;
+
+        System.out.println("Pick your cheese:");
 
         do{
 
-            System.out.println("Pick your cheese:");
             System.out.println("1) Cheddar");
             System.out.println("2) Mozzarella");
             System.out.println("3) Gouda");
             System.out.println("4) Provolone");
             System.out.println("5) None");
+            System.out.println("0) Done ");
 
             try{
 
@@ -281,9 +330,48 @@ public class UserInterface {
                     case 5:
                         cheeseType = "None";
                         break;
+                    case 0:
+                        addingCheese = false;
+                        break;
                     default:
-                        System.out.println("Invalid cheese choice. Try again.");
+                        System.out.println("Invalid cheese choice. Make sure you pick an option that is listed.");
+                        continue;
 
+                }
+
+                if(cheeseChoice != 0){
+
+                    do{
+                        System.out.println("Do you want extra cheese? (1 = yes , 0 = no)");
+                        try{
+                            int extraChoice = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if(extraChoice == 1){
+                                extraForCheese = true;
+                                validInputForCheese = true;
+                            }else if(extraChoice == 0){
+                                extraForCheese = false;
+                                validInputForCheese = true;
+                            } else{
+                                System.out.println("Make sure you pick 0 or 1");
+                            }
+                        } catch(InputMismatchException e){
+                            System.out.println("Invalid type.");
+                            scanner.next();
+                        }
+
+                    } while(!validInputForCheese);
+
+                }
+
+                if (cheeseChoice >= 1 && cheeseChoice <= 6) {
+                    cheeseCount++;
+                }
+
+                if (cheeseCount >= maxCheeseCount) {
+                    System.out.println("You have reached the maximum number of cheese toppings.");
+                    addingCheese = false;
                 }
 
             } catch(InputMismatchException e){
@@ -291,44 +379,21 @@ public class UserInterface {
                 scanner.next();
             }
 
-        } while(cheeseType == null);
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        boolean extraForCheese = false;
-        boolean validInputForCheese = false;
-
-        do{
-            System.out.println("Do you want extra cheese? (1 = yes , 0 = no)");
-            try{
-                int extraChoice = scanner.nextInt();
-                scanner.nextLine();
-
-                if(extraChoice == 1){
-                    extraForCheese = true;
-                    validInputForCheese = true;
-                }else if(extraChoice == 0){
-                    extraForCheese = false;
-                    validInputForCheese = true;
-                } else{
-                    System.out.println("Make sure you pick 0 or 1");
-                }
-            } catch(InputMismatchException e){
-                System.out.println("Invalid type.");
-                scanner.next();
-            }
-
-        } while(!validInputForCheese);
+        } while(addingCheese);
 
         sandwich.addCheese(cheeseType, extraForCheese);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         String toppingType = null;
+        boolean addingToppings = true;
 
-        do{
+        System.out.println("You will now choose your regular toppings: (Press 0 when you are done)");
 
-            System.out.println("You will now choose your regular toppings: ");
+        do {
+
             System.out.println("1) Lettuce");
             System.out.println("2) Peppers");
             System.out.println("3) Onions");
@@ -338,53 +403,64 @@ public class UserInterface {
             System.out.println("7) Pickles");
             System.out.println("8) Guacamole");
             System.out.println("9) Mushrooms");
+            System.out.println("0) Done selecting toppings");
 
-            try{
-
+            try {
                 int toppingChoice = scanner.nextInt();
                 scanner.nextLine();
 
                 switch (toppingChoice) {
                     case 1:
                         toppingType = "Lettuce";
+                        sandwich.addRegularTopping(toppingType);
                         break;
                     case 2:
                         toppingType = "Peppers";
+                        sandwich.addRegularTopping(toppingType);
                         break;
                     case 3:
                         toppingType = "Onions";
+                        sandwich.addRegularTopping(toppingType);
                         break;
                     case 4:
                         toppingType = "Tomatoes";
+                        sandwich.addRegularTopping(toppingType);
                         break;
                     case 5:
                         toppingType = "Jalapenos";
+                        sandwich.addRegularTopping(toppingType);
                         break;
                     case 6:
                         toppingType = "Cucumbers";
+                        sandwich.addRegularTopping(toppingType);
                         break;
                     case 7:
                         toppingType = "Pickles";
+                        sandwich.addRegularTopping(toppingType);
                         break;
                     case 8:
                         toppingType = "Guacamole";
+                        sandwich.addRegularTopping(toppingType);
                         break;
                     case 9:
                         toppingType = "Mushrooms";
+                        sandwich.addRegularTopping(toppingType);
+                        break;
+                    case 0:
+                        addingToppings = false;
                         break;
                     default:
-                        System.out.println("Invalid regular topping choice. Try again.");
-
+                        System.out.println("Topping choice does not exist. Try again.");
                 }
 
-            } catch(InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Invalid Type - must be an integer");
                 scanner.next();
             }
 
-        } while(toppingType == null);
+        } while (addingToppings);
 
-        sandwich.addRegularTopping(toppingType);
+        System.out.println("You have finished selecting regular toppings.");
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -592,7 +668,6 @@ public class UserInterface {
             }
         } while (flavor == null);
 
-        Drink drink = new Drink(size, flavor);
         return new Drink(size, flavor);
     }
 
@@ -638,15 +713,10 @@ public class UserInterface {
             }
         } while (chipType == null);
 
-
-        Chip chip = new Chip(chipType);
         return new Chip(chipType);
     }
 
     private void printCurrentOrder() {
-
-        String GREEN = "\u001B[32m";
-        String RESET = "\u001B[0m";
 
         List<Product> products = currentOrder.getProducts();
 
@@ -656,7 +726,7 @@ public class UserInterface {
         double totalCost = 0;
 
         for (int i = products.size() - 1; i >= 0; i--) {
-            Product product = products.get(i);
+            Product product = products.get(i); // access each individual product object in the products list during the loop's iteration
             double productPrice = product.calcPrice();
             System.out.printf("%-1s " + GREEN + "$%.2f" + RESET + "%n", product, productPrice);
             totalCost += productPrice;
@@ -671,8 +741,9 @@ public class UserInterface {
 
         printCurrentOrder();
 
-        System.out.println("1) Confirm Order");
-        System.out.println("2) Cancel - Delete Order");
+        System.out.println(BLUE + "1) Confirm Order" + RESET);
+        System.out.println(RED + "2) Cancel - Delete Order" + RESET);
+
         int ans = scanner.nextInt();
 
         if (ans == 1) {

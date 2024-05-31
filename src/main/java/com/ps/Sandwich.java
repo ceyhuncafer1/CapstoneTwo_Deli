@@ -145,17 +145,18 @@ public class Sandwich extends Product{
 
     @Override
     public String toString() {
+
         return "Sandwich: " +
-                "size=" + size +
-                ", breadType='" + breadType + '\'' +
-                ", meats=" + meats +
-                ", extraMeats=" + extraMeats +
-                ", cheeses=" + cheeses +
-                ", extraCheeses=" + extraCheeses +
-                ", regularToppings=" + regularToppings +
-                ", sauces=" + sauces +
-                ", sides=" + sides +
-                ", toasted=" + toasted +
-                '}';
+                "  Size: " + size + "\"" +
+                ", Bread Type = " + breadType + "" +
+                ", Meats: " + meats +
+                ", Extra Meats = " + extraMeats + "\n" +
+                " \t \t\tCheeses = " + cheeses +
+                ", Extra Cheeses = " + extraCheeses + "\n" +
+                " \t \t\tRegular Toppings = " + regularToppings +
+                ", Sauces = " + sauces +
+                ", Sides = " + sides +
+                ", Toasted = " + toasted
+                ;
     }
 }
