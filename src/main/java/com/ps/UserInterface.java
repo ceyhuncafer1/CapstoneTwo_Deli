@@ -192,17 +192,17 @@ public class UserInterface {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         int meatCount = 0; // counter for number of meats user selects
-        int maxMeatCount = 6; // if it hits 6 we will force stop user and go to next screen
+        final int maxMeatCount = 3; // max meat count to limit user choices
         boolean addingMeat = true; // flag in case user is done after 1 and wants to exit screen earlier
-        String meatType = null;
-        boolean extraForMeat = false; // is extra meat requested
         boolean validInput = false;
-
+        String meatType = null;
+        boolean extraForMeat = false;
 
         System.out.println("You will now choose your meat-based toppings: ");
 
         do {
 
+            // display meat options
             System.out.println("1) Steak");
             System.out.println("2) Ham");
             System.out.println("3) Salami");
@@ -212,47 +212,48 @@ public class UserInterface {
             System.out.println("0) Done");
 
             try {
+                // read what meat the user wants
                 int meatChoice = scanner.nextInt();
                 scanner.nextLine();
 
                 switch (meatChoice) {
                     case 1:
                         meatType = "Steak";
-                        System.out.println("You picked: Steak");
                         break;
                     case 2:
                         meatType = "Ham";
-                        System.out.println("You picked: Ham");
                         break;
                     case 3:
                         meatType = "Salami";
-                        System.out.println("You picked: Salami");
                         break;
                     case 4:
                         meatType = "Roast Beef";
-                        System.out.println("You picked: Roast Beef");
                         break;
                     case 5:
                         meatType = "Chicken";
-                        System.out.println("You picked: Chicken");
                         break;
                     case 6:
                         meatType = "Bacon";
-                        System.out.println("You picked: Bacon");
                         break;
                     case 0:
-                        addingMeat = false;
-                        break;
-                    default:
-                        System.out.println("Invalid meat choice. Try again.");
+                        addingMeat = false; // if the user chooses 0, set addingMeat to false to exit the loop
                         continue;
+                    default:
+                        System.out.println("Invalid meat choice. Try again."); // if the user enters an invalid choice prompt them again
+                        continue; // skip the rest of the loop iteration
                 }
 
-                if(meatChoice != 0){
+                //put this to the top instead of at the bottom to fix it not printing to the console properly. did not add to the array list properly before
+                if (meatChoice >= 1 && meatChoice <= 6) {
 
-                    do {
-                        System.out.println("Do you want extra meat? (1 = yes , 0 = no)");
+                    validInput = false;
+
+                    while (!validInput) {
+                        // regular while instead of a do while like before. based on vlid input for extra meat
+                        System.out.println("Do you want extra meat? (1 = yes, 0 = no)");
+
                         try {
+
                             int extraChoice = scanner.nextInt();
                             scanner.nextLine();
 
@@ -271,59 +272,58 @@ public class UserInterface {
                             }
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid type. Please enter a number.");
-                            scanner.next();
+                            scanner.next(); // Clear the invalid input
                         }
-                    } while (!validInput);
+                    }
 
+                    sandwich.addMeat(meatType, extraForMeat);
+                    meatCount++; // increment at the end instead
+
+                    if (meatCount >= maxMeatCount) {
+                        System.out.println("You have reached the maximum number of meat-based toppings.");
+                        addingMeat = false;
+                    }
                 }
-
-                if (meatChoice >= 1 && meatChoice <= 6) {
-                    meatCount++;
-                }
-
-                if (meatCount >= maxMeatCount) {
-                    System.out.println("You have reached the maximum number of meat-based toppings.");
-                    addingMeat = false;
-                }
-
 
             } catch (InputMismatchException e) {
                 System.out.println("Invalid Type - must be an integer");
-                scanner.next();
+                scanner.next(); // Clear the invalid input
             }
-
-
 
         } while (addingMeat);
 
-        sandwich.addMeat(meatType, extraForMeat); // add properties to  sandwich
-
         System.out.println("You have finished selecting meat-based toppings.");
+
+        /*
+        - display list of meat options
+        - read users choice to a switch statement
+        - for valid meat choices, user is asked if they want extra meat
+        - nested while loop for extra meat
+        - add sandwich(meatType, extraForMeat)
+        - meat++ , if maximum count is reached loop exit
+        - same implementation for cheese
+         */
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-        //same as meat and meat extra
         String cheeseType = null;
         int cheeseCount = 0;
-        int maxCheeseCount = 4;
-        boolean addingCheese = true;
+        final int maxCheeseCount = 4; // max cheese count to limit user choices
+        boolean addingCheese = true; // flag in case user is done after 1 and wants to exit screen earlier
         boolean extraForCheese = false;
         boolean validInputForCheese = false;
 
         System.out.println("Pick your cheese:");
 
-        do{
-
+        do {
             System.out.println("1) Cheddar");
             System.out.println("2) Mozzarella");
             System.out.println("3) Gouda");
             System.out.println("4) Provolone");
             System.out.println("5) None");
-            System.out.println("0) Done ");
+            System.out.println("0) Done");
 
-            try{
-
+            try {
                 int cheeseChoice = scanner.nextInt();
                 scanner.nextLine();
 
@@ -342,65 +342,56 @@ public class UserInterface {
                         break;
                     case 5:
                         cheeseType = "None";
-                        break;
+                        addingCheese = false;
+                        continue;
                     case 0:
                         addingCheese = false;
-                        break;
+                        continue;
                     default:
                         System.out.println("Invalid cheese choice. Make sure you pick an option that is listed.");
                         continue;
-
                 }
 
-                if(cheeseChoice != 0){
-
-                    do{
-                        System.out.println("Do you want extra cheese? (1 = yes , 0 = no)");
-                        try{
+                if (cheeseChoice >= 1 && cheeseChoice <= 4) {
+                    validInputForCheese = false;
+                    while (!validInputForCheese) {
+                        System.out.println("Do you want extra cheese? (1 = yes, 0 = no)");
+                        try {
                             int extraChoice = scanner.nextInt();
                             scanner.nextLine();
 
-                            if(extraChoice == 1){
-
+                            if (extraChoice == 1) {
                                 extraForCheese = true;
                                 validInputForCheese = true;
-
-                            }else if(extraChoice == 0){
-
+                            } else if (extraChoice == 0) {
                                 extraForCheese = false;
                                 validInputForCheese = true;
-
-                            } else{
+                            } else {
                                 System.out.println("Make sure you pick 0 or 1");
                             }
-                        } catch(InputMismatchException e){
-                            System.out.println("Invalid type.");
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid type. Please enter a number.");
                             scanner.next();
                         }
+                    }
 
-                    } while(!validInputForCheese);
-
-                }
-
-                if (cheeseChoice >= 1 && cheeseChoice <= 6) {
+                    sandwich.addCheese(cheeseType, extraForCheese);
                     cheeseCount++;
+
+                    if (cheeseCount >= maxCheeseCount) {
+                        System.out.println("You have reached the maximum number of cheese toppings.");
+                        addingCheese = false;
+                    }
                 }
 
-                if (cheeseCount >= maxCheeseCount) {
-                    System.out.println("You have reached the maximum number of cheese toppings.");
-                    addingCheese = false;
-                }
-
-            } catch(InputMismatchException e){
-                System.out.println("Invalid type error");
-                scanner.next();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid type. Please enter a number.");
+                scanner.next(); // Clear the invalid input
             }
 
+        } while (addingCheese);
 
-
-        } while(addingCheese);
-
-        sandwich.addCheese(cheeseType, extraForCheese);
+        System.out.println("You have finished selecting cheese toppings.");
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
